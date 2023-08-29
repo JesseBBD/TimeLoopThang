@@ -51,9 +51,9 @@ public class CameraFollow : MonoBehaviour
 
             center = new Vector2((left+right)/2, (top+bottom)/2);
             velocity = new Vector2(shiftX, shiftY);
-
         }
     }
+
     void Start()
     {
         boxArea = new BoxArea(player.GetComponent<Collider2D>().bounds, boxSize);
@@ -63,7 +63,7 @@ public class CameraFollow : MonoBehaviour
     {
         boxArea.Update(player.GetComponent<Collider2D>().bounds);
         Vector2 boxPosition = boxArea.center + Vector2.up*cameraVerticalOffset;
-        transform.position = (Vector3)boxPosition + Vector3.forward * -10;
+        transform.position = new Vector3(Mathf.Max(boxPosition.x+5f, -1f), boxPosition.y, -10);
     }
 
     void OnDrawGizmosSelected()
@@ -71,5 +71,4 @@ public class CameraFollow : MonoBehaviour
         Gizmos.color = new Color (1, 0, 1, 0.5f);
         Gizmos.DrawCube(boxArea.center, boxSize);
     }
-
 }
