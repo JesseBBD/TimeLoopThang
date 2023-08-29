@@ -1382,8 +1382,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 741122620}
-  boxSize: {x: 3, y: 5}
-  cameraVerticalOffset: 1
+  boxSize: {x: 3, y: 4}
+  cameraVerticalOffset: 2
 --- !u!1 &741122620
 GameObject:
   m_ObjectHideFlags: 0
