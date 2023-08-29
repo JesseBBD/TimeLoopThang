@@ -43,6 +43,11 @@ public class PlayerMovement : MonoBehaviour
 
     // Horizontal movement
     rb.velocity = new Vector2(moveDirection.x * speed, rb.velocity.y);
+    if(moveDirection.x >= 0){
+      transform.localScale = new Vector3(1, 1, 1);
+    }else{
+      transform.localScale = new Vector3(-1, 1, 1);
+    }
   }
 
   private void OnCollisionEnter2D(Collision2D collision)
