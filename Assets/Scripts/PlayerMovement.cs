@@ -2,21 +2,62 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    Rigidbody2D rb;
+  public float speed = 10.0f;
+  public float jumpForce = 5.0f;
+  public float groundRayDistance = 1.0f;
+  public LayerMask groundLayer;
 
-    void Start()
+  private Rigidbody2D rb;
+  private bool isJumping = false;
+  private bool isGrounded = false;
+
+  void Start()
+  {
+    rb = GetComponent<Rigidbody2D>();
+  }
+
+  void Update()
+  {
+    float moveX = Input.GetAxis("Horizontal");
+
+    // Perform raycasting to check for ground beneath player's feet
+    RaycastHit2D groundHit = Physics2D.Raycast(transform.position, Vector2.down, groundRayDistance, groundLayer);
+    isGrounded = groundHit.collider != null;
+
+    Vector2 moveDirection = new Vector2(moveX, 0);
+
+    // If on a slope, modify the moveDirection
+    if (isGrounded && groundHit.normal != Vector2.up)
     {
-        rb = GetComponent<Rigidbody2D>();
+      moveDirection = RotateByNormal(moveDirection, groundHit.normal);
     }
 
-    void Update()
-    {
-        float xMovement = Input.GetAxisRaw("Horizontal");
-        rb.velocity = new Vector2(xMovement * 7f, rb.velocity.y);
+    moveDirection.Normalize();
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            rb.velocity = new Vector2(rb.velocity.x, 5f);
-        }
+    // Only allow jumping if we're on the ground
+    if (Input.GetButtonDown("Jump") && isGrounded && !isJumping)
+    {
+      rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+      isJumping = true;
     }
+
+    // Horizontal movement
+    rb.velocity = new Vector2(moveDirection.x * speed, rb.velocity.y);
+  }
+
+  private void OnCollisionEnter2D(Collision2D collision)
+  {
+    if (((1 << collision.gameObject.layer) & groundLayer) != 0)
+    {
+      isJumping = false;
+    }
+  }
+
+  // Rotate the vector by the normal of the slope
+  private Vector2 RotateByNormal(Vector2 moveDirection, Vector2 normal)
+  {
+    float angle = Mathf.Atan2(normal.y, normal.x) * Mathf.Rad2Deg - 90;
+    Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    return rotation * moveDirection;
+  }
 }
