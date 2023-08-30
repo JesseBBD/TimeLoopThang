@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
   void Update()
   {
-    float moveX = Input.GetAxis("Horizontal");
+    float moveX = Input.GetAxisRaw("Horizontal");
 
     // Perform raycasting to check for ground beneath player's feet
     RaycastHit2D groundHit = Physics2D.Raycast(transform.position, Vector2.down, groundRayDistance, groundLayer);
