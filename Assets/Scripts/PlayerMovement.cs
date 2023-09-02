@@ -12,6 +12,18 @@ public class PlayerMovement : MonoBehaviour
   private bool isJumping = false;
   private bool isGrounded = false;
 
+  // Lerp related
+  private bool isLerping = false;
+  private Vector2 startPosition;
+  private Vector2 targetPosition;
+  private float lerpStartTime;
+  private float lerpTime = 2.0f; // 2 seconds to complete the Lerp
+
+  private void OnTriggerEnter2D(Collider2D other)
+  {
+    
+  }
+
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
@@ -20,6 +32,19 @@ public class PlayerMovement : MonoBehaviour
 
   void Update()
   {
+    if (isLerping)
+    {
+      float lerpValue = (Time.time - lerpStartTime) / lerpTime;
+      transform.position = Vector2.Lerp(startPosition, targetPosition, lerpValue);
+
+      if (lerpValue >= 1.0f)
+      {
+        isLerping = false;
+        rb.isKinematic = false;
+      }
+      return;
+    }
+
     float moveX = Input.GetAxisRaw("Horizontal");
 
     // Perform raycasting to check for ground beneath player's feet
@@ -72,5 +97,14 @@ public class PlayerMovement : MonoBehaviour
     float angle = Mathf.Atan2(normal.y, normal.x) * Mathf.Rad2Deg - 90;
     Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     return rotation * moveDirection;
+  }
+
+  public void StartLerpToTarget(Vector2 target)
+  {
+    isLerping = true;
+    lerpStartTime = Time.time;
+    startPosition = transform.position;
+    targetPosition = target;
+    rb.isKinematic = true;
   }
 }
