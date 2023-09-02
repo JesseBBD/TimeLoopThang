@@ -8,12 +8,14 @@ public class PlayerMovement : MonoBehaviour
   public LayerMask groundLayer;
 
   private Rigidbody2D rb;
+  private Animator animator;
   private bool isJumping = false;
   private bool isGrounded = false;
 
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
+    animator = GetComponent<Animator>();
   }
 
   void Update()
@@ -43,10 +45,16 @@ public class PlayerMovement : MonoBehaviour
 
     // Horizontal movement
     rb.velocity = new Vector2(moveDirection.x * speed, rb.velocity.y);
-    if(moveDirection.x >= 0){
+    if(moveDirection.x > 0){
+      animator.SetBool("walking", true);
       transform.localScale = new Vector3(1, 1, 1);
-    }else{
+    }else if(moveDirection.x < 0){
+      
+      animator.SetBool("walking", true);
       transform.localScale = new Vector3(-1, 1, 1);
+    }else{
+      
+      animator.SetBool("walking", false);
     }
   }
 
