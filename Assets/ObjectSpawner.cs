@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-  public GameObject fallingObjectPrefab;  // Assign your prefab here in the inspector
-  public float spawnRate = 1.0f;  // How many objects per second
-  public float spawnWidth = 10.0f;  // Width of the spawning area
-  public string objectName =  "Calculator";
+  public float spawnRate = 1.0f;
+  public float spawnWidth = 10.0f;
+  public string objectName = "Calculator";
 
   void Start()
   {
@@ -17,16 +16,16 @@ public class ObjectSpawner : MonoBehaviour
   {
     while (true)
     {
-      // Generate a random X position within the spawnWidth
       float randomX = Random.Range(-spawnWidth / 2, spawnWidth / 2);
-
-      // Use the random X position and a Y position that is just above the camera's view
       Vector3 spawnPosition = new Vector3(randomX, Camera.main.orthographicSize + 1, 0);
-
-      // Instantiate the object at the spawnPosition
-      Instantiate(Resources.Load("Prefabs/"+objectName), spawnPosition, Quaternion.identity);
-
-      // Wait for the next spawn
+      if (objectName == "Paper")
+      {
+        Instantiate(Resources.Load("Prefabs/" + objectName + Random.Range(1, 7).ToString()), spawnPosition, Quaternion.identity);
+      }
+      else
+      {
+        Instantiate(Resources.Load("Prefabs/" + objectName), spawnPosition, Quaternion.identity);
+      }
       yield return new WaitForSeconds(1.0f / spawnRate);
     }
   }
