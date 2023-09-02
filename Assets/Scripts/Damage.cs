@@ -6,9 +6,12 @@ public class Damage : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collidingObject)
     {
-        if(collidingObject.gameObject.tag == "Player"){
+        if (collidingObject.gameObject.tag == "Player")
+        {
             collidingObject.gameObject.GetComponent<PlayerManager>().TakeDamage(damageAmount);
-        }else if(!(collidingObject.gameObject.tag == "Damage")){
+        }
+        else if (!(collidingObject.gameObject.tag == "Damage"))
+        {
             Destroy(gameObject);
         }
     }
