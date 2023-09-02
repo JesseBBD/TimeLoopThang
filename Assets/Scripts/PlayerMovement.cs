@@ -66,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
     {
       rb.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
       isJumping = true;
+      animator.SetTrigger("jump");
     }
 
     // Horizontal movement
