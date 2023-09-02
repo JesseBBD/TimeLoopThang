@@ -8,7 +8,7 @@ public class Damage : MonoBehaviour
     {
         if(collidingObject.gameObject.tag == "Player"){
             collidingObject.gameObject.GetComponent<PlayerManager>().TakeDamage(damageAmount);
-        }else{
+        }else if(!(collidingObject.gameObject.tag == "Damage")){
             Destroy(gameObject);
         }
     }
