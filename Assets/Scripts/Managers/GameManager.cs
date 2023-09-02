@@ -25,11 +25,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator LoadScene_Fade(Scene s, Canvas c){
+    public IEnumerator LoadScene_Fade(Scene s, Canvas c)
+    {
         c.GetComponent<Animator>().SetTrigger("start");
 
         yield return new WaitForSeconds(sceneTransitionTime);
         SceneManager.LoadScene((int)s);
-
     }
 }

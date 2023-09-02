@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    [SerializeField] float playerHealth;
-    [SerializeField] const float playerMaxHealth = 10;
+    [SerializeField] float playerAge;
+    [SerializeField] const float playerMaxAge = 100;
+    [SerializeField] Hourglass hourglass;
 
     void Awake()
     {
-        playerHealth = playerMaxHealth;
+        playerAge = 0;
     }
 
     public void TakeDamage(float damage){
-        playerHealth -= damage;
-        if(playerHealth <= 0){
+        playerAge += damage;
+        if(playerAge >= playerMaxAge){
+            playerAge = 100;
             gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         }
+        hourglass.addAge(damage, playerAge);
     }
 }
