@@ -6,7 +6,7 @@ public class FadingPlatform : MonoBehaviour
 {
   public float fadeSpeed = 0.5f;  // Speed at which the platform fades
   public float waitTime = 2.0f;   // Time to wait before starting to fade
-
+  public float startDelay = 2f;
   private SpriteRenderer spriteRenderer;
   private Collider2D collider2D;
   private bool isFading = false;
@@ -15,9 +15,14 @@ public class FadingPlatform : MonoBehaviour
   {
     spriteRenderer = GetComponent<SpriteRenderer>();
     collider2D = GetComponent<Collider2D>();
-    StartCoroutine(FadeInOut());
+    StartCoroutine(FirstDelay());
   }
 
+  IEnumerator FirstDelay()
+  {
+    yield return new WaitForSeconds(startDelay);
+    StartCoroutine(FadeInOut());
+  }
   IEnumerator FadeInOut()
   {
     while (true)
