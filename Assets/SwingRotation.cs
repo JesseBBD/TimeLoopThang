@@ -7,7 +7,6 @@ public class SwingRotation : MonoBehaviour
 
   [SerializeField] float speed = 5f;
   [SerializeField] float maxAngle = 45f;  // Maximum swing angle
-  [SerializeField] Collider2D myCollider;
 
   private float currentAngle = 0f;  // The current angle of rotation
   private float direction = 1f;  // Direction of rotation
@@ -18,23 +17,13 @@ public class SwingRotation : MonoBehaviour
   {
     // Calculate the amount to rotate for this frame
     float rotationAmount = Time.deltaTime * speed * direction;
-    myCollider.gameObject.SetActive(false);
-    // Debug messages
-    Debug.Log("Rotation Amount: " + rotationAmount);
-    Debug.Log("Current Angle before update: " + currentAngle);
 
     // Update the current angle
     currentAngle += rotationAmount;
 
-    // Debug message
-    Debug.Log("Current Angle after update: " + currentAngle);
-
     // Check if the swing has reached the maximum angle
     if (Mathf.Abs(currentAngle) >= maxAngle)
     {
-      // Debug message
-      Debug.Log("Reached Max Angle, reversing direction");
-
       // Reverse direction
       direction *= -1;
 

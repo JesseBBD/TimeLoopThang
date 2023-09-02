@@ -14,7 +14,7 @@ public class FadingPlatform : MonoBehaviour
   void Start()
   {
     spriteRenderer = GetComponent<SpriteRenderer>();
-    collider2D = GetComponent<CapsuleCollider2D>();
+    collider2D = GetComponent<Collider2D>();
     StartCoroutine(FadeInOut());
   }
 
