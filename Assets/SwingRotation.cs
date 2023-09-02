@@ -5,6 +5,7 @@ public class SwingRotation : MonoBehaviour
 
   [SerializeField] float speed = 5f;
   [SerializeField] float maxAngle = 45f;  // Maximum swing angle
+
   private float currentAngle = 0f;  // The current angle of rotation
   private float direction = 1f;  // Direction of rotation
 
