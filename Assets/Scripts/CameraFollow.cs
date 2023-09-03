@@ -63,7 +63,7 @@ public class CameraFollow : MonoBehaviour
     {
         boxArea.Update(player.GetComponent<Collider2D>().bounds);
         Vector2 boxPosition = boxArea.center + Vector2.up*cameraVerticalOffset;
-        transform.position = new Vector3(Mathf.Max(boxPosition.x+5f, -1f), boxPosition.y, -10);
+        transform.position = new Vector3(Mathf.Max(boxPosition.x+5f, -2f), boxPosition.y, -10);
     }
 
     void OnDrawGizmosSelected()
