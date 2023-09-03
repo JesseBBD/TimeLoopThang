@@ -22,6 +22,7 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] float backgroundScrollSpeed = 5.0f;
     [SerializeField] GameObject[] lastObjects;
     [SerializeField] Image fade;
+    [SerializeField] MusicTriggerController musicTriggerController;
     float fallingCounter = 0f;
     void Awake()
     {
@@ -58,6 +59,7 @@ public class PlayerManager : MonoBehaviour
                 animator.SetTrigger("dieFly");
             }
             playerMovement.setIsDead(true);
+            musicTriggerController.RestartTriggers();
             StartCoroutine(TriggerRestartGame());
         }
     }

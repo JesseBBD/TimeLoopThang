@@ -4,9 +4,8 @@ using UnityEngine;
 public class BackgroundSoundManager : MonoBehaviour
 {
     [SerializeField] AudioClip baby, teen, adult, old;
-    [SerializeField] AudioClip overlayBaby, overlayTeen, overlayAdult;
     public static BackgroundSoundManager instance;
-    [SerializeField] AudioSource audioSource, overlayAudioSource;
+    [SerializeField] AudioSource audioSource;
     int currentlyPlaying = 0;
 
     void Awake()
@@ -38,20 +37,16 @@ public class BackgroundSoundManager : MonoBehaviour
     void PlayNextSound(int i)
     {
         audioSource.volume = 1;
-        overlayAudioSource.volume = 1;
         switch (i)
         {
             case 0:
                 audioSource.clip = baby;
-                overlayAudioSource.clip = overlayBaby;
                 break;
             case 1:
                 audioSource.clip = teen;
-                overlayAudioSource.clip = overlayTeen;
                 break;
             case 2:
                 audioSource.clip = adult;
-                overlayAudioSource.clip = overlayAdult;
                 break;
             case 3:
                 audioSource.clip = old;
@@ -59,10 +54,6 @@ public class BackgroundSoundManager : MonoBehaviour
         }
 
         audioSource.Play();
-        if (i != 3)
-        {
-            overlayAudioSource.Play();
-        }
     }
 
 
@@ -76,16 +67,16 @@ public class BackgroundSoundManager : MonoBehaviour
         if (fadeTime)
         {
             float elapsedTime = Time.time - startTime;
-            float fadeFactor = 1f-(elapsedTime / fadeDuration);
+            float fadeFactor = 1f - (elapsedTime / fadeDuration);
 
-            fadeFactor = Mathf.Clamp01(fadeFactor);
-            audioSource.volume = fadeFactor;
-            overlayAudioSource.volume = fadeFactor;
-
-            if (fadeFactor <= 0)
+            if (fadeFactor < 0)
             {
                 fadeTime = false;
                 PlayNextSound(currentlyPlaying);
+            }
+            else
+            {
+                audioSource.volume = fadeFactor;
             }
         }
     }
