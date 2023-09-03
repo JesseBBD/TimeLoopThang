@@ -75,22 +75,26 @@ public class Hourglass : MonoBehaviour
             }
         }
 
-        currentAge += Time.deltaTime / 10f;
-        if (currentAge > 100)
+        if (!isLoadingIcon)
         {
-            currentAge = 100;
-            oldAge = 100;
-            age.text = Mathf.Round(currentAge).ToString();
-            playerManager.SetPlayerAge(oldAge);
+            currentAge += Time.deltaTime / 10f;
+            if (currentAge > 100)
+            {
+                currentAge = 100;
+                oldAge = 100;
+                age.text = Mathf.Round(currentAge).ToString();
+                playerManager.SetPlayerAge(oldAge);
+            }
+            else if (currentAge * 100 % 10 < 1)
+            {
+                oldAge = currentAge;
+                bottomFill.fillAmount = currentAge / 100f;
+                topFill.fillAmount = 1f - bottomFill.fillAmount;
+                age.text = Mathf.Round(currentAge).ToString();
+                playerManager.SetPlayerAge(oldAge);
+            }
         }
-        else if (currentAge * 100 % 10 < 1)
-        {
-            oldAge = currentAge;
-            bottomFill.fillAmount = currentAge / 100f;
-            topFill.fillAmount = 1f - bottomFill.fillAmount;
-            age.text = Mathf.Round(currentAge).ToString();
-            playerManager.SetPlayerAge(oldAge);
-        }
+
     }
 
     public void addAge(float t, float a)
