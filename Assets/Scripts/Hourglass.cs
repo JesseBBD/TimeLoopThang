@@ -7,6 +7,7 @@ public class Hourglass : MonoBehaviour
 {
     [SerializeField] TMP_Text age;
     [SerializeField] Image topFill, bottomFill, sand;
+    [SerializeField] PlayerManager playerManager;
     [SerializeField] float maxAge = 100f;
     [SerializeField] float currentAge = 0f;
     [SerializeField] float oldAge = 0f;
@@ -80,6 +81,7 @@ public class Hourglass : MonoBehaviour
             bottomFill.fillAmount = currentAge / 100f;
             topFill.fillAmount = 1f - bottomFill.fillAmount;
             age.text = Mathf.Round(currentAge).ToString();
+            playerManager.SetPlayerAge(oldAge);
         }
     }
 

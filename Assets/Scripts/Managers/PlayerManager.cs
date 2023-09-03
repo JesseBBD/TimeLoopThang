@@ -4,6 +4,11 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
     [SerializeField] float playerAge;
+    public void SetPlayerAge(float p)
+    {
+        playerAge = p;
+        CheckAge();
+    }
     [SerializeField] const float playerMaxAge = 100;
     [SerializeField] Hourglass hourglass;
     [SerializeField] Canvas canvas;
@@ -25,6 +30,12 @@ public class PlayerManager : MonoBehaviour
     public void TakeDamage(float damage)
     {
         playerAge += damage;
+        hourglass.addAge(damage, playerAge);
+        CheckAge();
+    }
+
+    void CheckAge()
+    {
         if (playerAge >= playerMaxAge)
         {
             playerAge = 100;
@@ -33,7 +44,6 @@ public class PlayerManager : MonoBehaviour
             playerMovement.setIsDead(true);
             StartCoroutine(TriggerRestartGame());
         }
-        hourglass.addAge(damage, playerAge);
     }
     IEnumerator TriggerRestartGame()
     {
