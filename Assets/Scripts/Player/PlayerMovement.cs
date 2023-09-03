@@ -122,8 +122,15 @@ public class PlayerMovement : MonoBehaviour
   {
     if (((1 << collision.gameObject.layer) & groundLayer) != 0)
     {
-      jumpAudioSource.clip = land;
-      jumpAudioSource.Play();
+      if (collision.gameObject.tag == "Floor")
+      {
+        if (!jumpAudioSource.isPlaying)
+        {
+          jumpAudioSource.clip = land;
+          jumpAudioSource.Play();
+        }
+
+      }
       isJumping = false;
     }
   }

@@ -26,10 +26,10 @@ public class BackgroundSoundManager : MonoBehaviour
 
     public void PlaySound(int i)
     {
+        startTime = Time.time;
         if (i != currentlyPlaying)
         {
             currentlyPlaying = i;
-            startTime = Time.deltaTime;
             fadeTime = true;
         }
     }
@@ -68,7 +68,7 @@ public class BackgroundSoundManager : MonoBehaviour
         {
             float elapsedTime = Time.time - startTime;
             float fadeFactor = 1f - (elapsedTime / fadeDuration);
-
+            Debug.Log("START TIME: " + startTime + " FADE FACTOR: " + fadeFactor);
             if (fadeFactor < 0)
             {
                 fadeTime = false;
