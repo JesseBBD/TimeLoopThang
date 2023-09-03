@@ -57,7 +57,7 @@ public class BackgroundSoundManager : MonoBehaviour
     }
 
 
-    float fadeDuration = 10f;
+    float fadeDuration = 5f;
     bool fadeTime = false;
     float startTime = 0f;
 
@@ -68,7 +68,6 @@ public class BackgroundSoundManager : MonoBehaviour
         {
             float elapsedTime = Time.time - startTime;
             float fadeFactor = 1f - (elapsedTime / fadeDuration);
-            Debug.Log("START TIME: " + startTime + " FADE FACTOR: " + fadeFactor);
             if (fadeFactor < 0)
             {
                 fadeTime = false;
