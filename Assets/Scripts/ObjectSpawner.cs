@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class ObjectSpawner : MonoBehaviour
 {
-  public float spawnRate = 1.0f;
+  public float spawnRate = 5.0f;
+  float thisSpawnRate;
   public float spawnWidth = 10.0f;
   public string objectName = "Calculator";
 
   void Start()
   {
     StartCoroutine(SpawnObjects());
+    thisSpawnRate = Random.Range(spawnRate / 2f, spawnRate);
   }
 
   IEnumerator SpawnObjects()
@@ -17,7 +19,7 @@ public class ObjectSpawner : MonoBehaviour
     while (true)
     {
       float randomX = Random.Range(-spawnWidth / 2, spawnWidth / 2);
-      Vector3 spawnPosition = new Vector3(randomX, Camera.main.orthographicSize + 1, 0);
+      Vector3 spawnPosition = new Vector3(transform.position.x + randomX, transform.position.y, 0);
       if (objectName == "Paper")
       {
         Instantiate(Resources.Load("Prefabs/" + objectName + Random.Range(1, 7).ToString()), spawnPosition, Quaternion.identity);
@@ -26,7 +28,8 @@ public class ObjectSpawner : MonoBehaviour
       {
         Instantiate(Resources.Load("Prefabs/" + objectName), spawnPosition, Quaternion.identity);
       }
-      yield return new WaitForSeconds(1.0f / spawnRate);
+      yield return new WaitForSeconds(thisSpawnRate);
+      thisSpawnRate = Random.Range(spawnRate / 2f, spawnRate);
     }
   }
 }
