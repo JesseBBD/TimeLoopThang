@@ -184,6 +184,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerAge: 0
   hourglass: {fileID: 0}
+  playerMovement: {fileID: 0}
 --- !u!95 &7947614964911605660
 Animator:
   serializedVersion: 5
