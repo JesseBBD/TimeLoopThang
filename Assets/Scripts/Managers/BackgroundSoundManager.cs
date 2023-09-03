@@ -57,7 +57,7 @@ public class BackgroundSoundManager : MonoBehaviour
     }
 
 
-    float fadeDuration = 5f;
+    float fadeDuration = 10f;
     bool fadeTime = false;
     float startTime = 0f;
 

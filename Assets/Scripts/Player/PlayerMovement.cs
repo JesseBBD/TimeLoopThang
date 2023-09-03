@@ -27,6 +27,8 @@ public class PlayerMovement : MonoBehaviour
   bool colourPopTime = false;
 
   CapsuleCollider2D[] playerColliders;
+  [SerializeField] AudioSource jumpAudioSource;
+  [SerializeField] AudioClip jumpUp, land;
 
   void Start()
   {
@@ -95,6 +97,8 @@ public class PlayerMovement : MonoBehaviour
         rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         isJumping = true;
         animator.SetTrigger("jump");
+        jumpAudioSource.clip = jumpUp;
+        jumpAudioSource.Play();
       }
 
 
