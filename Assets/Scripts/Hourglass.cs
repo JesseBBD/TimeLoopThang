@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class Hourglass : MonoBehaviour
@@ -75,7 +76,14 @@ public class Hourglass : MonoBehaviour
         }
 
         currentAge += Time.deltaTime / 10f;
-        if (currentAge * 100 % 10 < 1)
+        if (currentAge > 100)
+        {
+            currentAge = 100;
+            oldAge = 100;
+            age.text = Mathf.Round(currentAge).ToString();
+            playerManager.SetPlayerAge(oldAge);
+        }
+        else if (currentAge * 100 % 10 < 1)
         {
             oldAge = currentAge;
             bottomFill.fillAmount = currentAge / 100f;

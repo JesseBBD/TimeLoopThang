@@ -15,6 +15,9 @@ public class PlayerManager : MonoBehaviour
     private Animator animator;
     [SerializeField] PlayerMovement playerMovement;
     Vector3 startPos = new Vector3(-8, 4, 0);
+    bool falling = false;
+    [SerializeField] GameObject foreverBackground;
+    [SerializeField] float backgroundScrollSpeed = 5.0f;
 
     void Awake()
     {
@@ -61,11 +64,14 @@ public class PlayerManager : MonoBehaviour
         hourglass.Restart();
         Restart();
     }
-    public IEnumerator TriggerEndOfGame()
+
+    public void TriggerEndOfGame()
     {
-        yield return new WaitForSeconds(3);
-        Debug.Log("END OF GAME");
-        // GameManager.instance.LoadScene_Fade(Scene.MainMenu, canvas);
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(183f / 255f, 92f / 255f, 92f / 255f);
+        animator.SetTrigger("dieFlyForever");
+        playerMovement.setIsDead(true);
+        foreverBackground.SetActive(true);
+        falling = true;
     }
 
     IEnumerator FlashRed()
@@ -73,5 +79,16 @@ public class PlayerManager : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         gameObject.GetComponent<SpriteRenderer>().color = Color.white;
 
+    }
+
+    void Update()
+    {
+        if (falling)
+        {
+            // Move the background to create the falling illusion
+            Vector3 backgroundPosition = foreverBackground.transform.position;
+            backgroundPosition.y += backgroundScrollSpeed * Time.deltaTime;
+            foreverBackground.transform.position = backgroundPosition;
+        }
     }
 }
