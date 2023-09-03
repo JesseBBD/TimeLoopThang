@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
   private SpriteRenderer spriteRenderer;
   private bool isJumping = false;
   private bool isGrounded = false;
+  public bool GetIsGrounded() => isGrounded;
 
   // Lerp related
   private bool isLerping = false;

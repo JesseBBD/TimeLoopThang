@@ -29,6 +29,8 @@ public class PlayerManager : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        gameObject.GetComponent<SpriteRenderer>().color = new Color(234f / 255f, 150f / 255f, 150f / 255f);
+        StartCoroutine(FlashRed());
         playerAge += damage;
         hourglass.addAge(damage, playerAge);
         CheckAge();
@@ -40,7 +42,14 @@ public class PlayerManager : MonoBehaviour
         {
             playerAge = 100;
             gameObject.GetComponent<SpriteRenderer>().color = new Color(183f / 255f, 92f / 255f, 92f / 255f);
-            animator.SetTrigger("dieFloor");
+            if (playerMovement.GetIsGrounded())
+            {
+                animator.SetTrigger("dieFloor");
+            }
+            else
+            {
+                animator.SetTrigger("dieFly");
+            }
             playerMovement.setIsDead(true);
             StartCoroutine(TriggerRestartGame());
         }
@@ -56,5 +65,12 @@ public class PlayerManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3);
         GameManager.instance.LoadScene_Fade(Scene.MainMenu, canvas);
+    }
+
+    IEnumerator FlashRed()
+    {
+        yield return new WaitForSeconds(0.2f);
+        gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+
     }
 }
