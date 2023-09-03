@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 
   private Rigidbody2D rb;
   private Animator animator;
+  private SpriteRenderer spriteRenderer;
   private bool isJumping = false;
   private bool isGrounded = false;
 
@@ -18,33 +19,50 @@ public class PlayerMovement : MonoBehaviour
   private Vector2 targetPosition;
   private float lerpStartTime;
   private float lerpTime = 2.0f;
+  private float lerpColourTime = 1f;
   bool isDead = false;
   public void setIsDead(bool d) => isDead = d;
+
+  bool colourPopTime = false;
 
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
     animator = GetComponent<Animator>();
+    spriteRenderer = GetComponent<SpriteRenderer>();
   }
 
   void Update()
   {
     if (isDead)
     {
-        rb.velocity = new Vector2(0, 0);
+      rb.velocity = new Vector2(0, 0);
     }
     else
     {
-
       if (isLerping)
       {
         float lerpValue = (Time.time - lerpStartTime) / lerpTime;
         transform.position = Vector2.Lerp(startPosition, targetPosition, lerpValue);
-
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.1f-lerpValue);
         if (lerpValue >= 1.0f)
         {
           isLerping = false;
+          colourPopTime = true;
+          lerpStartTime = Time.time;
+          rb.velocity = new Vector2(0, 0);
           rb.isKinematic = false;
+        }
+        return;
+      }
+
+      if (colourPopTime)
+      {
+        float lerpValue = (Time.time - lerpStartTime) / lerpColourTime;
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, lerpValue);
+        if (lerpValue >= 1.0f)
+        {
+          colourPopTime = false;
         }
         return;
       }
@@ -105,10 +123,12 @@ public class PlayerMovement : MonoBehaviour
 
   public void StartLerpToTarget(Vector2 target)
   {
+    rb.velocity = new Vector2(0, 0);
     isLerping = true;
     lerpStartTime = Time.time;
     startPosition = transform.position;
     targetPosition = target;
     rb.isKinematic = true;
+    animator.SetBool("walking", false);
   }
 }

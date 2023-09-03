@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 797679436539701964}
   - component: {fileID: 6393438867873468318}
-  - component: {fileID: 4628084217705907090}
   - component: {fileID: 4807372924153062659}
+  - component: {fileID: 8003378150283317828}
   m_Layer: 0
   m_Name: Transporter
   m_TagString: Untagged
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3c91a0480ede4b248b4fdec833fe9792, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 27b66d671d81ddd4d842cb2354eacc1b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -86,8 +86,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4628084217705907090
-BoxCollider2D:
+--- !u!114 &4807372924153062659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8930643129992069797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cf401bf8938e224cbb55cbb4b83f438, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPosition: {x: 336, y: 136}
+--- !u!60 &8003378150283317828
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -122,25 +135,26 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 4, y: 4}
+    oldSize: {x: 10.24, y: 10.24}
     newSize: {x: 4, y: 4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 4, y: 4}
-  m_EdgeRadius: 0
---- !u!114 &4807372924153062659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8930643129992069797}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cf401bf8938e224cbb55cbb4b83f438, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPosition: {x: -6.4, y: 10}
+  m_Points:
+    m_Paths:
+    - - {x: 2.6025708, y: 4.844451}
+      - {x: 0.55622625, y: 5.076388}
+      - {x: -1.3141656, y: 3.652234}
+      - {x: -2.3360038, y: 1.0625982}
+      - {x: -2.202257, y: 0.20965934}
+      - {x: -2.4263883, y: -3.5775688}
+      - {x: -1.8530388, y: -4.062448}
+      - {x: 1.6704824, y: -4.9504786}
+      - {x: 2.5748084, y: -5.0842185}
+      - {x: 2.96, y: -4.7999997}
+      - {x: 3.1399999, y: -4.7}
+      - {x: 3.1399999, y: -4.5}
+      - {x: 3.12, y: -4.5}
+      - {x: 3.3443122, y: 2.8970952}
+  m_UseDelaunayMesh: 0
