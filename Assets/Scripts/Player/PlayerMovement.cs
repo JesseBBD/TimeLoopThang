@@ -51,11 +51,13 @@ public class PlayerMovement : MonoBehaviour
         float lerpValue = (Time.time - lerpStartTime) / lerpTime;
         transform.position = Vector2.Lerp(startPosition, targetPosition, lerpValue);
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0f);
+        spriteRenderer.enabled = false;
         playerColliders[1].enabled = false;
 
         if (lerpValue >= 1.0f)
         {
           playerColliders[1].enabled = true;
+          spriteRenderer.enabled = true;
           isLerping = false;
           colourPopTime = true;
           lerpStartTime = Time.time;
