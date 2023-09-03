@@ -43,7 +43,7 @@ public class GravestoneController : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            
+            StartCoroutine(other.GetComponent<PlayerManager>().TriggerEndOfGame());
         }
     }
 }

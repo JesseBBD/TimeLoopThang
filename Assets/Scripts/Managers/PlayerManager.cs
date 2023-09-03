@@ -61,10 +61,11 @@ public class PlayerManager : MonoBehaviour
         hourglass.Restart();
         Restart();
     }
-    IEnumerator TriggerEndOfGame()
+    public IEnumerator TriggerEndOfGame()
     {
         yield return new WaitForSeconds(3);
-        GameManager.instance.LoadScene_Fade(Scene.MainMenu, canvas);
+        Debug.Log("END OF GAME");
+        // GameManager.instance.LoadScene_Fade(Scene.MainMenu, canvas);
     }
 
     IEnumerator FlashRed()
