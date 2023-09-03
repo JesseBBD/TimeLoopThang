@@ -15,7 +15,7 @@ public class TransformerScript : MonoBehaviour
       PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
 
       // Call the StartLerpToTarget method
-      playerMovement.StartLerpToTarget(targetPosition);
+      playerMovement.StartLerpToTarget(new Vector3(targetPosition.x, targetPosition.y ,0));
     }
   }
 }

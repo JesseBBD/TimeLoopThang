@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour
   // Lerp related
   private bool isLerping = false;
   private Vector2 startPosition;
-  private Vector2 targetPosition;
+  private Vector3 targetPosition;
   private float lerpStartTime;
   private float lerpTime = 2.0f;
   private float lerpColourTime = 1f;
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
       {
         float lerpValue = (Time.time - lerpStartTime) / lerpTime;
         transform.position = Vector2.Lerp(startPosition, targetPosition, lerpValue);
-        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.1f-lerpValue);
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.1f - lerpValue);
         if (lerpValue >= 1.0f)
         {
           isLerping = false;
@@ -121,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
     return rotation * moveDirection;
   }
 
-  public void StartLerpToTarget(Vector2 target)
+  public void StartLerpToTarget(Vector3 target)
   {
     rb.velocity = new Vector2(0, 0);
     isLerping = true;
@@ -130,5 +130,19 @@ public class PlayerMovement : MonoBehaviour
     targetPosition = target;
     rb.isKinematic = true;
     animator.SetBool("walking", false);
+  }
+
+  public void RestartAndLerpToTarget(Vector3 target)
+  {
+    isDead = false;
+    rb.velocity = new Vector2(0, 0);
+    isLerping = true;
+    lerpStartTime = Time.time;
+    startPosition = transform.position;
+    targetPosition = target;
+    rb.isKinematic = true;
+    animator.SetBool("walking", false);
+    animator.SetTrigger("restart");
+    spriteRenderer.color = Color.white;
   }
 }

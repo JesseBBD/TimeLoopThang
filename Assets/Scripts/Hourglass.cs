@@ -26,7 +26,9 @@ public class Hourglass : MonoBehaviour
             currentAge = 100f;
             tickTime = true;
             lerpDuration = 5f;
-        }else{
+        }
+        else
+        {
             lerpDuration = 2f;
         }
     }
@@ -70,6 +72,15 @@ public class Hourglass : MonoBehaviour
                 Restart();
             }
         }
+
+        currentAge += Time.deltaTime / 10f;
+        if (currentAge * 100 % 10 < 1)
+        {
+            oldAge = currentAge;
+            bottomFill.fillAmount = currentAge / 100f;
+            topFill.fillAmount = 1f - bottomFill.fillAmount;
+            age.text = Mathf.Round(currentAge).ToString();
+        }
     }
 
     public void addAge(float t, float a)
@@ -78,12 +89,10 @@ public class Hourglass : MonoBehaviour
         tickTime = true;
     }
 
-    void Restart()
+    public void Restart()
     {
+        Debug.Log("HOUR GLASS RESTART???");
         rotate = false;
-        topFill.fillAmount = 1f;
-        bottomFill.fillAmount = 0f;
-
         transform.rotation = Quaternion.Euler(Vector3.zero);
         topFill.fillAmount = 1f;
         bottomFill.fillAmount = 0f;
@@ -91,6 +100,7 @@ public class Hourglass : MonoBehaviour
         elapsedTime = 0f;
         elapsedTime2 = 0f;
         oldAge = 0;
+        age.text = oldAge.ToString();
 
         if (isLoadingIcon)
         {
