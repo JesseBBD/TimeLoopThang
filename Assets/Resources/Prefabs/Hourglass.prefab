@@ -281,8 +281,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1.2259, y: -41.02379}
-  m_SizeDelta: {x: 53.249, y: 47.9877}
+  m_AnchoredPosition: {x: 1.3431, y: -38.8068}
+  m_SizeDelta: {x: 50.7978, y: 43.5538}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5966471916648071027
 CanvasRenderer:
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6431373, g: 0.6156863, b: 0.54901963, a: 1}
+  m_Color: {r: 0.8392157, g: 0.8235294, b: 0.7647059, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -317,7 +317,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.764151, g: 0.7502737, b: 0.71657175, a: 0.4745098}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -457,6 +457,8 @@ MonoBehaviour:
   currentAge: 0
   oldAge: 0
   lerpDuration: 2
+  isLoadingIcon: 0
+  rotate: 0
 --- !u!1 &7855115414866054201
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 2100000, guid: 11929484859f42140a01be97fe49adf5, type: 2}
-  m_Color: {r: 0.6431373, g: 0.6156863, b: 0.54901963, a: 1}
+  m_Color: {r: 0.8392157, g: 0.8235294, b: 0.7647059, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -590,7 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6415094, g: 0.615478, b: 0.5470986, a: 1}
+  m_Color: {r: 0.8392157, g: 0.8235294, b: 0.7647059, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
