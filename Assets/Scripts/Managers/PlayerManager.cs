@@ -18,6 +18,7 @@ public class PlayerManager : MonoBehaviour
     bool falling = false;
     [SerializeField] GameObject foreverBackground;
     [SerializeField] float backgroundScrollSpeed = 5.0f;
+    [SerializeField] GameObject[] lastObjects;
 
     void Awake()
     {
@@ -72,6 +73,10 @@ public class PlayerManager : MonoBehaviour
         playerMovement.setIsDead(true);
         foreverBackground.SetActive(true);
         falling = true;
+
+        foreach(GameObject g in lastObjects){
+            g.SetActive(false);
+        }
     }
 
     IEnumerator FlashRed()
