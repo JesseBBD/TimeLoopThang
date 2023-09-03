@@ -91,7 +91,6 @@ public class Hourglass : MonoBehaviour
 
     public void Restart()
     {
-        Debug.Log("HOUR GLASS RESTART???");
         rotate = false;
         transform.rotation = Quaternion.Euler(Vector3.zero);
         topFill.fillAmount = 1f;
@@ -100,7 +99,8 @@ public class Hourglass : MonoBehaviour
         elapsedTime = 0f;
         elapsedTime2 = 0f;
         oldAge = 0;
-        age.text = oldAge.ToString();
+        currentAge = 0;
+        age.text = currentAge.ToString();
 
         if (isLoadingIcon)
         {

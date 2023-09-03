@@ -44,7 +44,6 @@ public class PlayerManager : MonoBehaviour
     }
     IEnumerator TriggerEndOfGame()
     {
-        Debug.Log("TRIGGER END OF GAME");
         yield return new WaitForSeconds(3);
         GameManager.instance.LoadScene_Fade(Scene.MainMenu, canvas);
     }
