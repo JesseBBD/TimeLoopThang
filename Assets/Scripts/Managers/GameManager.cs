@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator LoadScene_Fade(Scene s, Canvas c)
     {
         c.GetComponent<Animator>().SetTrigger("start");
-
+        Debug.Log("IT'S HAPPENING");
         yield return new WaitForSeconds(sceneTransitionTime);
         SceneManager.LoadScene((int)s);
     }
