@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -19,7 +21,8 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] GameObject foreverBackground;
     [SerializeField] float backgroundScrollSpeed = 5.0f;
     [SerializeField] GameObject[] lastObjects;
-
+    [SerializeField] Image fade;
+    float fallingCounter = 0f;
     void Awake()
     {
         Restart();
@@ -77,6 +80,8 @@ public class PlayerManager : MonoBehaviour
         foreach(GameObject g in lastObjects){
             g.SetActive(false);
         }
+
+        StartCoroutine(DelayEOG());
     }
 
     IEnumerator FlashRed()
@@ -86,10 +91,20 @@ public class PlayerManager : MonoBehaviour
 
     }
 
+    IEnumerator DelayEOG(){
+        yield return new WaitForSeconds(backgroundScrollSpeed);
+        SceneManager.LoadScene((int)Scene.MainMenu);
+        
+    }
+
     void Update()
     {
         if (falling)
         {
+            fallingCounter += Time.deltaTime;
+            float t = Mathf.Clamp01(fallingCounter / backgroundScrollSpeed);
+            fade.color = new Color(0, 0, 0, t);
+
             // Move the background to create the falling illusion
             Vector3 backgroundPosition = foreverBackground.transform.position;
             backgroundPosition.y += backgroundScrollSpeed * Time.deltaTime;
