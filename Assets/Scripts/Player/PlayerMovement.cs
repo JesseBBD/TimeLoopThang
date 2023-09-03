@@ -26,11 +26,14 @@ public class PlayerMovement : MonoBehaviour
 
   bool colourPopTime = false;
 
+  CapsuleCollider2D[] playerColliders;
+
   void Start()
   {
     rb = GetComponent<Rigidbody2D>();
     animator = GetComponent<Animator>();
     spriteRenderer = GetComponent<SpriteRenderer>();
+    playerColliders = GetComponents<CapsuleCollider2D>();
   }
 
   void Update()
@@ -45,9 +48,12 @@ public class PlayerMovement : MonoBehaviour
       {
         float lerpValue = (Time.time - lerpStartTime) / lerpTime;
         transform.position = Vector2.Lerp(startPosition, targetPosition, lerpValue);
-        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0.1f - lerpValue);
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, 0f);
+        playerColliders[1].enabled = false;
+
         if (lerpValue >= 1.0f)
         {
+          playerColliders[1].enabled = true;
           isLerping = false;
           colourPopTime = true;
           lerpStartTime = Time.time;

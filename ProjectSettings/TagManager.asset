@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Damage
   - Spikes
+  - MusicManager
   layers:
   - Default
   - TransparentFX
